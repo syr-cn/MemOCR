@@ -1,0 +1,93 @@
+/* Fix for content overlapping with navbar */
+
+/* Ensure proper stacking context */
+.navbar {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 9999 !important; /* Very high z-index to stay on top */
+}
+
+/* Add top padding to prevent content from going under navbar */
+body {
+    margin: 0 !important;
+    padding: 0 !important;
+    padding-top: 52px !important; /* Match navbar height */
+}
+
+/* Ensure hero section doesn't overlap */
+.hero {
+    margin-top: 0 !important;
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+/* Make navbar background more opaque to prevent text showing through */
+.navbar {
+    background: rgb(255, 255, 255) !important;
+    background: rgba(255, 255, 255, 0.99) !important;
+    backdrop-filter: blur(30px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(30px) saturate(180%) !important;
+}
+
+/* Add subtle gradient to navbar for better separation */
+.navbar::after {
+    content: '' !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 1px !important;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(0, 0, 0, 0.1) 20%, 
+        rgba(0, 0, 0, 0.1) 80%, 
+        transparent 100%) !important;
+    pointer-events: none !important;
+}
+
+/* Scrolled state with full opacity */
+.navbar.scrolled {
+    background: rgb(255, 255, 255) !important;
+    background: rgba(255, 255, 255, 1) !important;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* Ensure all sections have proper z-index */
+.section {
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+/* Fix for any absolute positioned elements */
+.container {
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+/* Ensure progress bar stays on top of navbar */
+body > div[style*="position: fixed"][style*="top: 0"][style*="height: 3px"] {
+    z-index: 10000 !important;
+}
+
+/* Mobile adjustments */
+@media screen and (max-width: 1023px) {
+    .navbar-menu {
+        background: rgb(255, 255, 255) !important;
+        background: rgba(255, 255, 255, 0.98) !important;
+        backdrop-filter: blur(20px) !important;
+        -webkit-backdrop-filter: blur(20px) !important;
+    }
+    
+    .navbar-menu.is-active {
+        z-index: 9998 !important;
+    }
+}
+
+/* Debug - uncomment to see z-index layers */
+/*
+.navbar { background: rgba(255, 0, 0, 0.2) !important; }
+.hero { background: rgba(0, 255, 0, 0.2) !important; }
+.section { background: rgba(0, 0, 255, 0.2) !important; }
+*/ 

@@ -1,0 +1,224 @@
+/* Navbar Alignment Fix */
+
+/* Reset navbar defaults */
+.navbar {
+    min-height: 3.25rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3.25rem; /* Fixed height */
+}
+
+/* Ensure proper container alignment */
+.navbar > .container {
+    display: flex;
+    align-items: stretch;
+    min-height: 3.25rem;
+    height: 100%;
+    width: 100%;
+}
+
+/* Brand section */
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    min-height: 3.25rem;
+    height: 100%;
+}
+
+/* Menu section */
+.navbar-menu {
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 0;
+    height: 100%;
+}
+
+.navbar-end {
+    display: flex;
+    justify-content: flex-end;
+    margin-left: auto;
+    align-items: stretch;
+    height: 100%;
+}
+
+/* Individual navbar items */
+.navbar-item {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 0.5rem 1rem;
+    line-height: 1.5;
+    flex-grow: 0;
+    flex-shrink: 0;
+    color: #64748b;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.navbar-item:hover {
+    color: #29e154 !important;
+    background-color: transparent !important;
+}
+
+/* Hover underline effect - positioned at the very bottom of navbar */
+.navbar-end .navbar-item {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin: 0;
+    height: 100%;
+}
+
+.navbar-end .navbar-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0; /* Align exactly with navbar bottom */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background: #29e154;
+    transition: width 0.3s ease;
+    border-radius: 0;
+}
+
+.navbar-end .navbar-item:hover::after {
+    width: 100%; /* Full width of the item */
+}
+
+/* Brand logo styling */
+.navbar-brand .navbar-item {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #29e154;
+    padding: 0.5rem 1rem;
+}
+
+/* Remove underline from brand */
+.navbar-brand .navbar-item::after {
+    display: none;
+}
+
+/* Navbar background and shadow */
+.navbar {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+
+/* Scrolled state */
+.navbar.scrolled {
+    background: rgba(255, 255, 255, 0.98) !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08) !important;
+}
+
+/* Mobile responsive */
+@media screen and (min-width: 1024px) {
+    .navbar-menu {
+        align-items: stretch;
+        display: flex;
+    }
+    
+    .navbar-end {
+        align-items: stretch;
+    }
+}
+
+/* Mobile menu */
+@media screen and (max-width: 1023px) {
+    .navbar-menu {
+        display: none;
+        box-shadow: 0 8px 16px rgba(10,10,10,.1);
+        padding: 0.5rem 0;
+    }
+    
+    .navbar-menu.is-active {
+        display: block;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 100%;
+        background: rgba(255, 255, 255, 0.98);
+    }
+    
+    .navbar-end {
+        display: block;
+    }
+    
+    .navbar-item {
+        display: block;
+        padding: 0.5rem 1rem;
+    }
+    
+    .navbar-end .navbar-item::after {
+        bottom: 0;
+        width: calc(100% - 2rem);
+        left: 1rem;
+        transform: none;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    
+    .navbar-end .navbar-item:hover::after {
+        opacity: 1;
+    }
+}
+
+/* Hamburger menu styling */
+.navbar-burger {
+    cursor: pointer;
+    display: block;
+    height: 3.25rem;
+    position: relative;
+    width: 3.25rem;
+    margin-left: auto;
+}
+
+.navbar-burger span {
+    background-color: #29e154;
+    display: block;
+    height: 2px;
+    left: calc(50% - 8px);
+    position: absolute;
+    transform-origin: center;
+    transition-duration: 86ms;
+    transition-property: background-color, opacity, transform;
+    transition-timing-function: ease-out;
+    width: 16px;
+}
+
+.navbar-burger span:nth-child(1) {
+    top: calc(50% - 6px);
+}
+
+.navbar-burger span:nth-child(2) {
+    top: calc(50% - 1px);
+}
+
+.navbar-burger span:nth-child(3) {
+    top: calc(50% + 4px);
+}
+
+.navbar-burger.is-active span:nth-child(1) {
+    transform: translateY(5px) rotate(45deg);
+}
+
+.navbar-burger.is-active span:nth-child(2) {
+    opacity: 0;
+}
+
+.navbar-burger.is-active span:nth-child(3) {
+    transform: translateY(-5px) rotate(-45deg);
+}
+
+/* Desktop specific */
+@media screen and (min-width: 1024px) {
+    .navbar-burger {
+        display: none;
+    }
+}
