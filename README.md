@@ -7,7 +7,7 @@
 <p align="center">
   <a href="https://arxiv.org/abs/2601.21468"><img src="https://img.shields.io/badge/arXiv-2601.21468-b31b1b.svg" alt="arXiv"></a>
   <a href="https://huggingface.co/papers/2601.21468"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging_Face-Paper-yellow" alt="HuggingFace Paper"></a>
-  <a href="https://syr-cn.github.io/MemOCR-private/"><img src="https://img.shields.io/badge/Project-Page-green" alt="Project Page"></a>
+  <a href="https://meituan.github.io/MemOCR/"><img src="https://img.shields.io/badge/Project-Page-green" alt="Project Page"></a>
   <!-- <a href="#"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Model-blue" alt="HuggingFace Model"></a> -->
   <a href="./LICENSE"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License"></a>
 </p>
@@ -25,16 +25,15 @@
 
 MemOCR is a visual memory agent that dynamically adapts information density during memory drafting and reading. By incorporating budget-aware training objectives and adaptive information density mechanisms, MemOCR achieves superior performance in multi-hop question answering tasks while maintaining efficient token usage.
 
+<div align="center">
+<img src="docs/figs/memocr_teaser.png" width="100%" alt="MemOCR Teaser">
+</div>
+
 ### Key Features
 - **Adaptive Information Density**: Dynamically adjusts memory content richness based on task requirements
 - **Budget-Aware Training**: Optimizes memory usage with explicit token budget constraints
 - **Dual-Domain Architecture**: Separate memory drafting (text domain) and reading (vision domain) processes
 - **State-of-the-Art Performance**: Superior results on HotpotQA, 2WikiMultihopQA, NaturalQuestions, and TriviaQA benchmarks
-
-
-<div align="center">
-<img src="docs/figs/memocr_teaser.png" width="100%" alt="MemOCR Teaser">
-</div>
 
 ## 🏗️ Method
 
@@ -50,7 +49,7 @@ MemOCR consists of two main components:
 The framework employs budget-aware training objectives to balance memory informativeness and token efficiency.
 
 <div align="center">
-<img src="docs/figs/memocr_method_augmentation.png" width="75%" alt="Data Augmentation Strategy">
+<img src="docs/figs/memocr_method_augmentation.png" width="50%" alt="Data Augmentation Strategy">
 </div>
 
 
