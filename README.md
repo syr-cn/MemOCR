@@ -23,7 +23,8 @@
 
 ## 🌟 Overview
 
-MemOCR is a visual memory agent that dynamically adapts information density during memory drafting and reading. By incorporating budget-aware training objectives and adaptive information density mechanisms, MemOCR achieves superior performance in multi-hop question answering tasks while maintaining efficient token usage.
+MemOCR is a visual memory agent that dynamically adapts information density during memory drafting and reading, and optimizes visual layouts to highlight key information.
+It achieves superior performance in multi-hop question answering tasks while maintaining efficient token usage.
 
 <div align="center">
 <img src="docs/figs/memocr_teaser.png" width="100%" alt="MemOCR Teaser">
