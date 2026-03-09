@@ -1,0 +1,355 @@
+/* Final Visual Enhancements for Enigmata Website */
+
+/* Enhanced Navigation Bar */
+.navbar {
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+
+.navbar-menu {
+    align-items: center;
+}
+
+.navbar-end {
+    align-items: center;
+}
+
+.navbar-brand .navbar-item {
+    padding-bottom: 0 !important;
+}
+
+.navbar-brand .navbar-item::after {
+    display: none;
+}
+
+.navbar-item {
+    position: relative;
+    color: #64748b;
+    transition: color 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    padding-bottom: 0.5rem !important;
+}
+
+.navbar-item:hover {
+    color: #29e154 !important;
+    background-color: transparent !important;
+}
+
+.navbar-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 3px;
+    background: #29e154;
+    transform: translateX(-50%);
+    transition: width 0.3s ease;
+    border-radius: 3px;
+}
+
+.navbar-item:hover::after {
+    width: 80%;
+}
+
+/* Navbar scroll effect */
+.navbar.scrolled {
+    background: rgba(255, 255, 255, 0.98) !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08) !important;
+}
+
+/* Enhanced Figure Captions */
+figure {
+    margin: 2rem 0;
+    text-align: center;
+}
+
+figure img {
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    height: auto;
+    transition: all 0.3s ease;
+}
+
+figure:hover img {
+    transform: scale(1.02);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+figcaption {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #64748b;
+    font-style: italic;
+}
+
+/* Enhanced Emoji Icons in Titles */
+.title.is-3 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.title.is-3::before {
+    content: '';
+    font-size: 1.5em;
+    filter: grayscale(0%);
+    transition: transform 0.3s ease;
+}
+
+.section:hover .title.is-3::before {
+    transform: rotate(10deg) scale(1.1);
+}
+
+/* Beautiful Blockquotes */
+blockquote {
+    position: relative;
+    padding: 2rem 2rem 2rem 3rem;
+    margin: 2rem 0;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border-left: 5px solid #29e154;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+blockquote::before {
+    content: '"';
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    font-size: 3rem;
+    color: #29e154;
+    opacity: 0.3;
+    font-family: Georgia, serif;
+}
+
+/* Enhanced Download Link */
+a[href*="HuggingFace Dataset"] {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(135deg, #29e154, #0cb963);
+    color: white !important;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(12, 185, 99, 0.3);
+}
+
+a[href*="HuggingFace Dataset"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(12, 185, 99, 0.4);
+}
+
+/* Enhanced Puzzle Grid Animation */
+#dataset-display-area {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+#dataset-display-area > div {
+    animation: fadeInScale 0.5s ease-out;
+    animation-fill-mode: both;
+}
+
+#dataset-display-area > div:nth-child(1) { animation-delay: 0.1s; }
+#dataset-display-area > div:nth-child(2) { animation-delay: 0.2s; }
+#dataset-display-area > div:nth-child(3) { animation-delay: 0.3s; }
+#dataset-display-area > div:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Enhanced Performance Results Cards */
+figure {
+    position: relative;
+    overflow: hidden;
+}
+
+figure::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.5) 50%, transparent 70%);
+    transform: rotate(45deg) translateY(-100%);
+    transition: transform 0.6s;
+}
+
+figure:hover::before {
+    transform: rotate(45deg) translateY(100%);
+}
+
+/* Mobile Menu Button */
+.navbar-burger {
+    display: none;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .navbar-burger {
+        display: block;
+    }
+    
+    .navbar-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        padding: 1rem;
+    }
+    
+    .navbar-menu.is-active {
+        display: block;
+    }
+    
+    .navbar-end {
+        flex-direction: column;
+    }
+    
+    .navbar-item {
+        padding: 0.75rem 1rem;
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* Smooth Page Load Animation */
+body {
+    animation: pageLoad 0.8s ease-out;
+}
+
+@keyframes pageLoad {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Enhanced Citation Block */
+pre code {
+    display: block;
+    padding: 1.5rem !important;
+    background: #1e293b;
+    color: #e2e8f0;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Add glow effect to important elements */
+.publication-title {
+    text-shadow: 0 0 30px rgba(12, 185, 99, 0.3);
+}
+
+/* Performance optimization for animations */
+.hero::before,
+figure::before,
+.button::before {
+    will-change: transform;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #29e154, #34d399);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #059669, #29e154);
+}
+
+/* Add subtle pattern to sections */
+.section:nth-child(even) {
+    position: relative;
+    background-color: #fafbfc;
+}
+
+.section:nth-child(even)::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: radial-gradient(circle at 2px 2px, rgba(12, 185, 99, 0.03) 1px, transparent 1px);
+    background-size: 20px 20px;
+    pointer-events: none;
+}
+
+/* Glowing accent for key information */
+strong {
+    position: relative;
+    color: #1e293b;
+    font-weight: 600;
+}
+
+/* Enhanced list items with custom markers */
+.content ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.content ul li {
+    position: relative;
+    padding-left: 2rem;
+    margin-bottom: 1rem;
+}
+
+.content ul li::before {
+    content: '✦';
+    position: absolute;
+    left: 0;
+    color: #29e154;
+    font-size: 1.2rem;
+    line-height: 1.4;
+}
+
+/* Improved spacing and typography */
+.content p {
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+}
+
+.content h4 {
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: #1e293b;
+    font-size: 1.4rem;
+}
+
+/* Final touches */
+.hero-body {
+    position: relative;
+    z-index: 1;
+} 

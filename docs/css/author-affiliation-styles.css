@@ -1,0 +1,150 @@
+/* Author and Affiliation Styles */
+
+/* Author names styling */
+.publication-authors {
+    margin: 2rem 0 1.5rem;
+    line-height: 1.8;
+    text-align: center;
+}
+
+.author-block {
+    display: inline-block;
+    margin: 0.25rem 0.5rem;
+    padding: 0;
+    background: transparent;
+    border-radius: 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #1e293b;
+    transition: color 0.3s ease;
+}
+
+.author-block:hover {
+    color: #10b981;
+    background: transparent;
+    transform: none;
+}
+
+/* Superscript styling for author affiliations */
+.author-block sup {
+    font-size: 0.75rem;
+    color: #10b981;
+    font-weight: 600;
+    margin-left: 2px;
+}
+
+/* Affiliations section */
+.publication-affiliations {
+    margin: 1.5rem 0 2rem;
+    text-align: center;
+    padding: 1.5rem;
+    background: #f8fafc;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+}
+
+.affiliation-block {
+    display: inline-block;
+    margin: 0.25rem 0.75rem;
+    font-size: 0.95rem;
+    color: #64748b;
+    line-height: 1.6;
+}
+
+.affiliation-block sup {
+    font-size: 0.8rem;
+    color: #10b981;
+    font-weight: 600;
+    margin-right: 4px;
+}
+
+/* Equal contribution note */
+.affiliation-note {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #64748b;
+    font-style: italic;
+    text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .publication-authors {
+        line-height: 2.2;
+    }
+    
+    .author-block {
+        font-size: 1rem;
+        margin: 0.2rem 0.3rem;
+    }
+    
+    .publication-affiliations {
+        padding: 1rem;
+        margin: 1rem 0 1.5rem;
+    }
+    
+    .affiliation-block {
+        display: block;
+        margin: 0.5rem 0;
+        font-size: 0.9rem;
+    }
+}
+
+/* Animation for authors */
+.publication-authors .author-block {
+    opacity: 0;
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.publication-authors .author-block:nth-child(1) { animation-delay: 0.1s; }
+.publication-authors .author-block:nth-child(2) { animation-delay: 0.15s; }
+.publication-authors .author-block:nth-child(3) { animation-delay: 0.2s; }
+.publication-authors .author-block:nth-child(4) { animation-delay: 0.25s; }
+.publication-authors .author-block:nth-child(5) { animation-delay: 0.3s; }
+.publication-authors .author-block:nth-child(6) { animation-delay: 0.35s; }
+.publication-authors .author-block:nth-child(7) { animation-delay: 0.4s; }
+.publication-authors .author-block:nth-child(8) { animation-delay: 0.45s; }
+.publication-authors .author-block:nth-child(9) { animation-delay: 0.5s; }
+.publication-authors .author-block:nth-child(10) { animation-delay: 0.55s; }
+.publication-authors .author-block:nth-child(11) { animation-delay: 0.6s; }
+.publication-authors .author-block:nth-child(12) { animation-delay: 0.65s; }
+
+/* Animation for affiliations */
+.publication-affiliations {
+    opacity: 0;
+    animation: fadeIn 0.8s ease-out 0.7s forwards;
+}
+
+/* Separator between authors when needed */
+.author-block + .author-block::before {
+    content: '';
+    display: inline-block;
+    width: 3px;
+    height: 3px;
+    background: #cbd5e1;
+    border-radius: 50%;
+    margin: 0 0.3rem;
+    vertical-align: middle;
+}
+
+/* Remove separator for first author */
+.author-block:first-child::before {
+    display: none;
+}
+
+/* Hover effect for affiliations */
+.publication-affiliations:hover {
+    background: #f1f5f9;
+    border-color: #cbd5e1;
+    transition: all 0.3s ease;
+}
+
+/* Make affiliation numbers stand out */
+.affiliation-block sup {
+    background: #10b981;
+    color: white;
+    padding: 0.1rem 0.3rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 500;
+}

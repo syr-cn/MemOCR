@@ -1,0 +1,163 @@
+/* Precise Navbar Alignment Fix */
+
+/* Force navbar to have consistent height */
+.navbar,
+.navbar.is-fixed-top {
+    height: 52px !important; /* Standard navbar height */
+    min-height: 52px !important;
+    z-index: 1030 !important; /* Ensure navbar stays on top */
+}
+
+/* Add padding to body when navbar is fixed */
+body {
+    padding-top: 52px !important; /* Match navbar height */
+}
+
+/* Container should fill the navbar height */
+.navbar > .container {
+    height: 100% !important;
+    display: flex !important;
+    align-items: stretch !important;
+}
+
+/* Brand and menu sections */
+.navbar-brand,
+.navbar-menu {
+    height: 100% !important;
+    display: flex !important;
+    align-items: stretch !important;
+}
+
+/* Navigation end section */
+.navbar-end {
+    height: 100% !important;
+    display: flex !important;
+    align-items: stretch !important;
+    margin-left: auto !important;
+}
+
+/* Reset all navbar items */
+.navbar-item {
+    display: flex !important;
+    align-items: center !important;
+    padding: 0 1rem !important;
+    margin: 0 !important;
+    height: 100% !important;
+    position: relative !important;
+    color: #64748b !important;
+    font-weight: 500 !important;
+    transition: color 0.2s ease !important;
+    background: transparent !important;
+    border: none !important;
+    text-decoration: none !important;
+}
+
+/* Hover state */
+.navbar-item:hover {
+    color: #29e154 !important;
+    background-color: transparent !important;
+    text-decoration: none !important;
+}
+
+/* Remove all existing underlines */
+.navbar-item::after,
+.navbar-item::before,
+.navbar-end .navbar-item::after,
+.navbar-end .navbar-item::before {
+    display: none !important;
+}
+
+/* Add new underline only to navbar-end items */
+.navbar-end .navbar-item {
+    border-bottom: 3px solid transparent !important;
+    transition: color 0.2s ease, border-color 0.2s ease !important;
+}
+
+.navbar-end .navbar-item:hover {
+    border-bottom-color: #29e154 !important;
+}
+
+/* Alternative approach using pseudo-element */
+/*
+.navbar-end .navbar-item::after {
+    content: '' !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 3px !important;
+    background: #29e154 !important;
+    transform: scaleX(0) !important;
+    transition: transform 0.2s ease !important;
+    display: block !important;
+}
+
+.navbar-end .navbar-item:hover::after {
+    transform: scaleX(1) !important;
+}
+*/
+
+/* Brand styling */
+.navbar-brand .navbar-item {
+    font-weight: 700 !important;
+    font-size: 1.2rem !important;
+    color: #29e154 !important;
+    border-bottom: none !important;
+}
+
+.navbar-brand .navbar-item:hover {
+    color: #29e154 !important;
+    border-bottom: none !important;
+}
+
+/* Remove focus outlines */
+.navbar-item:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Navbar background */
+.navbar {
+    background: rgba(255, 255, 255, 0.98) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05) !important;
+    transition: all 0.3s ease !important;
+    border-bottom: 1px solid rgba(0,0,0,0.05) !important;
+}
+
+/* Scrolled state */
+.navbar.scrolled {
+    background: rgba(255, 255, 255, 1) !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1) !important;
+    border-bottom: 1px solid rgba(0,0,0,0.1) !important;
+}
+
+/* Ensure navbar container has solid background */
+.navbar > .container {
+    background: inherit !important;
+}
+
+/* Mobile responsive adjustments */
+@media screen and (max-width: 1023px) {
+    .navbar-end .navbar-item {
+        height: auto !important;
+        padding: 0.75rem 1rem !important;
+        border-bottom: none !important;
+        border-left: 3px solid transparent !important;
+        transition: all 0.2s ease !important;
+    }
+    
+    .navbar-end .navbar-item:hover {
+        border-left-color: #29e154 !important;
+        border-bottom: none !important;
+        background-color: rgba(58, 118, 237, 0.05) !important;
+    }
+}
+
+/* Debug helper - uncomment to see element boundaries */
+/*
+.navbar { border: 2px solid red !important; }
+.navbar-end { border: 2px solid green !important; }
+.navbar-item { border: 2px solid blue !important; }
+*/ 

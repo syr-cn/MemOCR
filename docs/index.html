@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="description" content="MemOCR: Layout-Aware Visual Memory for Efficient Long-Horizon Reasoning" />
+  <meta name="keywords" content="visual memory, long-context reasoning, OCR, reinforcement learning, LLM, agent" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MemOCR: Layout-Aware Visual Memory for Efficient Long-Horizon Reasoning</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet" />
+  <link rel="stylesheet" href="./css/bulma.min.css" />
+  <link rel="stylesheet" href="./css/bulma-carousel.min.css" />
+  <link rel="stylesheet" href="./css/bulma-slider.min.css" />
+  <link rel="stylesheet" href="./css/fontawesome.all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" />
+  <link rel="stylesheet" href="./css/index.css" />
+  <link rel="stylesheet" href="./css/enhanced-styles.css" />
+  <link rel="stylesheet" href="./css/final-enhancements.css" />
+  <link rel="stylesheet" href="./css/navbar-fix.css" />
+  <link rel="stylesheet" href="./css/navbar-alignment-fix.css" />
+  <link rel="stylesheet" href="./css/overlap-fix.css" />
+  <link rel="stylesheet" href="./css/spacing-fix.css" />
+  <link rel="stylesheet" href="./css/author-affiliation-styles.css" />
+  <link rel="icon" href="./figs/longcat-face.png" type="image/png" />
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./js/fontawesome.all.min.js"></script>
+  <script src="./js/bulma-carousel.min.js"></script>
+  <script src="./js/bulma-slider.min.js"></script>
+  <script src="./js/index.js"></script>
+  <script src="./js/enhanced-animations.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      chtml: { displayAlign: "center" },
+      loader: { load: ['[tex]/ams'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+  <style>
+    .left-logo {
+      margin-right: 1rem;
+      border-radius: 0;
+    }
+    .math-center {
+      display: block;
+      text-align: center;
+      margin: 1.5rem 0;
+      overflow-x: auto;
+    }
+    .nowrap-math {
+      white-space: nowrap;
+      display: inline-block;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+    <div class="container">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="#">
+          <img src="figs/longcat_logo.png" alt="LongCat logo" style="height: 1.5rem; max-height: unset;" class="left-logo">
+          | MemOCR
+        </a>
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+      <div class="navbar-menu">
+        <div class="navbar-end">
+          <a class="navbar-item" href="#introduction">Introduction</a>
+          <a class="navbar-item" href="#method">Method</a>
+          <a class="navbar-item" href="#experiments">Experiments</a>
+          <a class="navbar-item" href="#conclusion">Conclusion</a>
+          <a class="navbar-item" href="#citation">Citation</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container">
+        <div class="has-text-centered">
+          <h1 class="publication-title">
+            <span>MemOCR: Layout-Aware Visual Memory for Efficient Long-Horizon Reasoning</span>
+          </h1>
+
+          <div class="publication-authors">
+            <span class="author-block">Yaorui Shi<sup>1,2</sup></span>
+            <span class="author-block">Shugui Liu<sup>1</sup></span>
+            <span class="author-block">Yu Yang<sup>2</sup></span>
+            <span class="author-block">Wenyu Mao<sup>1</sup></span>
+            <span class="author-block">Yuxin Chen<sup>3,2</sup></span>
+            <span class="author-block">Qi Gu<sup>2</sup></span>
+            <span class="author-block">Hui Su<sup>2</sup></span>
+            <span class="author-block">Xunliang Cai<sup>2</sup></span>
+            <span class="author-block">Xiang Wang<sup>1</sup></span>
+            <span class="author-block">An Zhang<sup>1</sup></span>
+          </div>
+
+          <div class="publication-affiliations">
+            <span class="affiliation-block"><sup>1</sup>University of Science and Technology of China</span><br>
+            <span class="affiliation-block"><sup>2</sup>Meituan LongCat Team</span>
+            <span class="affiliation-block"><sup>3</sup>National University of Singapore</span>
+          </div>
+
+          <div class="publication-links">
+            <span class="link-block">
+              <a href="https://arxiv.org/abs/2601.21468" class="button is-dark" target="_blank">
+                <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                <span>Paper</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href="https://huggingface.co/papers/2601.21468" class="button is-dark" target="_blank">
+                <span class="icon"><i class="far fa-file-pdf"></i></span>
+                <span><span style="font-family: 'Noto Color Emoji', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Android Emoji';">🤗</span> HF Paper</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href="https://github.com/syr-cn/MemOCR" class="button is-dark" target="_blank">
+                <span class="icon"><i class="fab fa-github"></i></span>
+                <span>Code</span>
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="introduction">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-10">
+          <h2 class="title is-3">Introduction</h2>
+          <div class="content">
+            <p>
+              Long-horizon agentic reasoning necessitates effectively compressing growing interaction histories into a limited context window.
+              Most existing memory systems serialize history as text, where token-level cost is uniform and scales linearly with length (uniform information density), often spending scarce budget on low-value details.
+            </p>
+            <p>
+              We propose a paradigm shift from 1D textual memory to 2D visual memory by introducing <strong>MemOCR</strong>, a multimodal memory agent that improves long-horizon reasoning under tight context budgets by allocating memory space with adaptive information density through visual layout.
+              Rather than using uniform text encoding, MemOCR renders structured rich-text memory (incorporating headings, highlights, and font sizes) into visual images that can be read via OCR-like processing.
+            </p>
+            <p>
+              This approach allows <strong>adaptive information density</strong>: important evidence is assigned higher visual priority (e.g., prominent headings or bold text), while auxiliary details are compressed into visually smaller text.
+              For a text segment of length L rendered at font scale s, the occupied area scales as O(L·s²), enabling fine-grained control over information density.
+            </p>
+            <p>
+              Through reinforcement learning with budget-aware objectives, MemOCR learns to preserve readability of crucial evidence even under extreme compression.
+              At <strong>16 visual tokens</strong>, MemOCR preserves <strong>62.2% average accuracy</strong> (only -16.6% relative drop), while text-based baselines collapse to 31.6% (−53.3% drop).
+            </p>
+
+            <figure class="image" style="max-width: 950px; margin: 1rem auto;">
+              <img src="figs/memocr_teaser.png" alt="MemOCR teaser">
+              <figcaption>
+                <span>MemOCR allocates memory budget via visual layout to achieve adaptive information density, achieving 8× token-efficiency gains at extreme budgets.</span>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="method">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-10">
+          <h2 class="title is-3">Method</h2>
+          <div class="content">
+            <h4><strong>Two-Stage Memory System</strong></h4>
+            <p>
+              MemOCR operates through two distinct stages: <strong>memory drafting</strong> in the text domain and <strong>memory reading</strong> in the vision domain.
+            </p>
+
+            <h4><strong>Memory Drafting (Text Domain)</strong></h4>
+            <p>
+              The agent maintains a persistent rich-text memory in Markdown format, incrementally updated with incoming information.
+              Crucially, important evidence is assigned higher visual priority (e.g., prominent headings or bold text), while auxiliary details are compressed into visually smaller text.
+              This design enables non-uniform budget allocation without conditioning on runtime constraints.
+            </p>
+
+            <h4><strong>Memory Reading (Vision Domain)</strong></h4>
+            <p>
+              The rich-text memory is rendered deterministically into a 2D image using a Markdown-to-HTML-to-screenshot pipeline (FastAPI/Playwright with Chromium backend).
+              The agent then reads this visual memory using a vision-language model (Qwen2.5-VL-7B-Instruct) to answer queries.
+            </p>
+            <p>
+              Budget control occurs through resolution manipulation: for a text segment of length L rendered at font scale s, the occupied area (and thus approximate visual-token cost) scales as <strong>O(L·s²)</strong>.
+              This quadratic relationship enables fine-grained control over information density.
+            </p>
+
+            <figure class="image" style="max-width: 1000px; margin: 1rem auto;">
+              <img src="figs/memocr_method_architecture.png" alt="MemOCR architecture">
+              <figcaption>
+                <span>MemOCR system architecture: from text-based memory drafting to visual memory reading with adaptive layout.</span>
+              </figcaption>
+            </figure>
+
+            <h4><strong>RL Training with Budget-Aware Objectives</strong></h4>
+            <p>
+              To prevent the shortcut of uniform text rendering, MemOCR employs three complementary training tasks optimized via GRPO (Group Relative Policy Optimization):
+            </p>
+            <ul>
+              <li><strong>Standard QA (𝒯<sub>std</sub>)</strong>: 512-token budget ensures global correctness</li>
+              <li><strong>QA w/ Augmented Memory (𝒯<sub>augM</sub>)</strong>: 4× per dimension downsampling (16× fewer pixels) forces crucial evidence to remain readable under compression</li>
+              <li><strong>QA w/ Augmented Question (𝒯<sub>augQ</sub>)</strong>: Detail-oriented questions on uncompressed memory preserve auxiliary information</li>
+            </ul>
+            <p>
+              The drafting behavior is optimized via aggregated advantages across all three tasks, while reading behaviors use task-specific advantages.
+              This multi-task training ensures robust performance across varying budget constraints.
+            </p>
+
+            <figure class="image" style="max-width: 500px; margin: 1rem auto;">
+              <img src="figs/memocr_method_augmentation.png" alt="Training augmentation strategy">
+              <figcaption>
+                <span>Budget-aware training objectives with memory and question augmentation to prevent uniform rendering shortcuts.</span>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="experiments">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-10">
+          <h2 class="title is-3">Experiments</h2>
+          <div class="content">
+            <h4><strong>Experimental Setup</strong></h4>
+            <p>
+              <strong>Datasets</strong>: HotpotQA (multi-hop, ~30K tokens during training), 2WikiMultiHopQA, Natural Questions, and TriviaQA, padded to 10K/30K/100K tokens at evaluation.
+            </p>
+            <p>
+              <strong>Baselines</strong>: Raw history (Qwen2.5-Instruct, R1-Distill Qwen, Qwen2.5-1M), textual summary (Mem0, Mem-α, MemAgent), using Qwen2.5-VL-7B-Instruct as MemOCR's backbone.
+            </p>
+            <p>
+              <strong>Memory Budgets</strong>: {16, 64, 256, 1024} visual tokens, mapped to pixel resolutions via 28×28 patch size calculations.
+            </p>
+
+            <h4><strong>RQ1: Overall Performance</strong></h4>
+            <p>
+              MemOCR achieves <strong>74.6% average accuracy</strong> at 10K context with full budget, outperforming the strongest baseline (67.8%).
+              More importantly, at extreme budgets: MemOCR preserves <strong>62.2% average accuracy at 16 tokens</strong>, corresponding to only a 16.6% relative drop, compared to MemAgent's collapse to 31.6% (−53.3% drop).
+            </p>
+            <p>
+              Single-hop tasks (NQ, TriviaQA) show counterintuitive behavior: lower budgets sometimes improve performance (e.g., TriviaQA at 10K: 80.8% at 16 tokens vs. 79.6% at 1024), suggesting sparse evidence benefits from noise filtering.
+            </p>
+
+            <figure class="image" style="max-width: 950px; margin: 1rem auto;">
+              <img src="figs/memocr_main_results.png" alt="Main results">
+              <figcaption>
+                <span>Performance comparison across different context lengths and memory budgets. MemOCR maintains robust performance even at extreme 16-token budgets.</span>
+              </figcaption>
+            </figure>
+
+            <h4><strong>RQ2: Visual Robustness & Token Efficiency</strong></h4>
+            <p>
+              Removing visual layout causes marked additional degradation at low budgets, confirming that layout drives robustness.
+              MemOCR achieves an <strong>8× token-efficiency gain</strong> at extreme budgets: comparable accuracy at 8 tokens to baselines at 64 tokens.
+            </p>
+
+            <div class="columns is-vcentered">
+              <div class="column">
+                <figure class="image">
+                  <img src="figs/memocr_analysis_budget.png" alt="Budget analysis">
+                  <figcaption><span>Budget robustness analysis showing MemOCR's advantage at tight constraints.</span></figcaption>
+                </figure>
+              </div>
+              <div class="column">
+                <figure class="image">
+                  <img src="figs/memocr_analysis_oracle.png" alt="Oracle injection analysis">
+                  <figcaption><span>Region-wise robustness: evidence in H1 headers is consistently more compression-robust than plain text.</span></figcaption>
+                </figure>
+              </div>
+            </div>
+
+            <h4><strong>RQ3: Adaptive Density Emergence</strong></h4>
+            <p>
+              During RL training, MemOCR shifts precise evidence into the crucial region (precision ↑ ~1.8×) and reduces density in the detailed region (precision ↓ ~0.46×), while crucial regions remain orders of magnitude shorter than detail sections.
+              This demonstrates emergent adaptive information density allocation.
+            </p>
+
+            <figure class="image" style="max-width: 800px; margin: 1rem auto;">
+              <img src="figs/memocr_analysis_density.png" alt="Density analysis">
+              <figcaption><span>Evolution of information density across memory regions during RL training.</span></figcaption>
+            </figure>
+
+            <h4><strong>RQ4: Ablation Study</strong></h4>
+            <p>
+              Progressive objective removal shows that using 𝒯<sub>std</sub> alone yields weakest results, adding 𝒯<sub>augQ</sub> improves low-budget robustness, and full three-objective training provides largest gains in extreme-budget settings.
+            </p>
+
+            <figure class="image" style="max-width: 900px; margin: 1rem auto;">
+              <img src="figs/memocr_ablation.png" alt="Ablation results">
+              <figcaption><span>Ablation study showing the contribution of each training objective.</span></figcaption>
+            </figure>
+
+            <h4><strong>Qualitative Analysis</strong></h4>
+            <p>
+              A case study at 16-token budget demonstrates: (1) Textual baseline fails via hard truncation removing critical entity "Gene MacLellan", (2) MemOCR w/o layout fails because uniform rendering becomes unreadable after downsampling to 16 visual tokens (approximately 12K pixels), (3) MemOCR succeeds by isolating "Ocean Band" and "Gene MacLellan" in visually prominent regions, preserving legibility under aggressive compression.
+            </p>
+
+            <figure class="image" style="max-width: 1000px; margin: 1rem auto;">
+              <img src="figs/memocr_casestudy.png" alt="Case study">
+              <figcaption><span>Qualitative comparison showing how MemOCR preserves critical evidence legibility at extreme 16-token budget through adaptive visual layout.</span></figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="conclusion">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-10">
+          <h2 class="title is-3">Conclusion</h2>
+          <div class="content">
+            <p>
+              MemOCR introduces a paradigm shift in agentic memory systems by moving from linear text serialization to 2D visual layouts with adaptive information density.
+              Through the clever use of visual hierarchy (headings, font sizes, formatting), MemOCR enables O(L·s²) budget control that allows crucial evidence to remain readable even under extreme compression.
+            </p>
+            <p>
+              Our budget-aware RL training with three complementary objectives prevents uniform rendering shortcuts and teaches the agent to strategically allocate visual space.
+              The result is an <strong>8× token-efficiency gain</strong> at extreme budgets, with only 16.6% relative performance drop at 16 tokens compared to 53.3% for text-based approaches.
+            </p>
+            <p>
+              While MemOCR demonstrates strong results on QA tasks, future work could explore transfer to planning and tool-use domains, optimize vision/OCR robustness at extreme compression, and reduce computational overhead relative to text-only baselines.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="citation">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-10">
+          <h2 class="title is-3">Citation</h2>
+          <div class="content">
+            <p>If you find this work useful, please cite:</p>
+            <pre><code class="latex">@article{shi2026memocr,
+  title={MemOCR: Layout-Aware Visual Memory for Efficient Long-Horizon Reasoning},
+  author={Shi, Yaorui and Liu, Shugui and Yang, Yu and Mao, Wenyu and Chen, Yuxin and Gu, Qi and Su, Hui and Cai, Xunliang and Wang, Xiang and Zhang, An},
+  journal={arXiv preprint arXiv:2601.21468},
+  year={2026}
+}
+            </code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="has-text-centered">
+        <p>© 2026 Meituan LongCat Team | Website template modified from <a href="https://memagent-sialab.github.io/">MemAgent</a></p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
